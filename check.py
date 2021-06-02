@@ -2,6 +2,8 @@ import socket
 import sys
 import json
 
+PROXY_TIMEOUT = 1
+
 runs = int(sys.argv[2])
 
 with open(sys.argv[1], 'r') as proxy_list:
@@ -18,7 +20,7 @@ with open(sys.argv[1], 'r') as proxy_list:
             proxy_sock = socket.socket()
             proxy_addr = proxy.split(':')
 
-            proxy_sock.settimeout(1) # needs to be fast.
+            proxy_sock.settimeout(PROXY_TIMEOUT)
 
             try:
                 proxy_sock.connect((proxy_addr[0], int(proxy_addr[1])))
